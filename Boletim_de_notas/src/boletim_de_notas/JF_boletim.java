@@ -63,6 +63,11 @@ public class JF_boletim extends javax.swing.JFrame {
         jLabel4.setText("3ª Nota:");
 
         jButton1.setText("Calcular");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel5.setText("Média");
@@ -143,8 +148,18 @@ public class JF_boletim extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+         String nome = jTextField1.getText();
+        double nota1 =  Double.valueOf(jTextField2.getText());
+        double nota2 =  Double.valueOf(jTextField3.getText());
+        double nota3 =  Double.valueOf(jTextField4.getText());
+        double resultado;
+        resultado = (nota1 + nota2 + nota3)/3;
+        jLabel5.setText(nome + " Sua média é "+ resultado);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
