@@ -5,6 +5,12 @@
  */
 package atividadefinalds;
 
+import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Dr chapatine
@@ -16,7 +22,55 @@ public class JFEmpresas extends javax.swing.JFrame {
      */
     public JFEmpresas() {
         initComponents();
+        txtCE.setEnabled(false);
+        txtNE.setEnabled(false);
+        txtCNPJ.setEnabled(false);
+        txtRS.setEnabled(false);
+        btnAtualizar.setEnabled(false);
+        btnAvancar.setEnabled(false);
+        btnAvancarT.setEnabled(false);
+        btnExcluir.setEnabled(false);
+        btnSalvar.setEnabled(false);
+        btnVoltar.setEnabled(false);
+        btnVoltarT.setEnabled(false);
+        
     }
+    
+    
+    public void atualizar(){
+          
+        Connection con = Conexao.abrirConexao();
+        
+        EmpresaDAO ed = new EmpresaDAO(con);
+        
+        List<EmpresaBean> listaEmpresa = new ArrayList<EmpresaBean>();
+        
+        listaEmpresa = ed.listarEmpresa();
+        
+        DefaultTableModel tbm = (DefaultTableModel) table.getModel();
+        
+        for (int i = tbm.getRowCount() - 1; i >= 0; i--) {
+            tbm.removeRow(i);
+        }
+        
+        int i = 0;
+        
+        for (EmpresaBean cb : listaEmpresa) {
+            tbm.addRow(new String[1]);
+            
+            table.setValueAt(cb.getCod(), i, 0);
+            table.setValueAt(cb.getNome(), i, 1);
+            
+            i++;
+        }
+            txtCE.setText("");
+            txtNE.setText("");
+            txtCNPJ.setText("");
+            txtRS.setText("");
+            
+        Conexao.fecharConexao(con); 
+        
+        }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -30,6 +84,7 @@ public class JFEmpresas extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jButton2 = new javax.swing.JButton();
         lblCE = new javax.swing.JLabel();
         lblNE = new javax.swing.JLabel();
         lblCNPJ = new javax.swing.JLabel();
@@ -42,6 +97,16 @@ public class JFEmpresas extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
         lblCli = new javax.swing.JLabel();
+        btnSalvar = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
+        btnAtualizar = new javax.swing.JButton();
+        btnPesquisar = new javax.swing.JButton();
+        btnVoltarT = new javax.swing.JButton();
+        btnVoltar = new javax.swing.JButton();
+        btnAvancar = new javax.swing.JButton();
+        btnAvancarT = new javax.swing.JButton();
+        btnNovo = new javax.swing.JButton();
+        lblMsg = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -111,9 +176,11 @@ public class JFEmpresas extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        table.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        table.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null}
+
             },
             new String [] {
                 "Código", "Nome do Dependente"
@@ -135,11 +202,18 @@ public class JFEmpresas extends javax.swing.JFrame {
             }
         });
         table.setSelectionBackground(new java.awt.Color(255, 255, 255));
+        table.setSelectionForeground(new java.awt.Color(0, 0, 0));
+        table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableMouseClicked(evt);
+            }
+        });
+        table.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tableKeyReleased(evt);
+            }
+        });
         jScrollPane2.setViewportView(table);
-        if (table.getColumnModel().getColumnCount() > 0) {
-            table.getColumnModel().getColumn(0).setResizable(false);
-            table.getColumnModel().getColumn(1).setResizable(false);
-        }
 
         lblCli.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         lblCli.setText("Clínicas");
@@ -163,14 +237,114 @@ public class JFEmpresas extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE))
         );
 
+        btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/save.png"))); // NOI18N
+        btnSalvar.setBorder(null);
+        btnSalvar.setMaximumSize(new java.awt.Dimension(20, 20));
+        btnSalvar.setMinimumSize(new java.awt.Dimension(20, 20));
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
+
+        btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/delete.png"))); // NOI18N
+        btnExcluir.setBorder(null);
+        btnExcluir.setMaximumSize(new java.awt.Dimension(20, 20));
+        btnExcluir.setMinimumSize(new java.awt.Dimension(20, 20));
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
+
+        btnAtualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/update.png"))); // NOI18N
+        btnAtualizar.setBorder(null);
+        btnAtualizar.setMaximumSize(new java.awt.Dimension(20, 20));
+        btnAtualizar.setMinimumSize(new java.awt.Dimension(20, 20));
+        btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtualizarActionPerformed(evt);
+            }
+        });
+
+        btnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/search.png"))); // NOI18N
+        btnPesquisar.setBorder(null);
+        btnPesquisar.setMaximumSize(new java.awt.Dimension(20, 20));
+        btnPesquisar.setMinimumSize(new java.awt.Dimension(20, 20));
+        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarActionPerformed(evt);
+            }
+        });
+
+        btnVoltarT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/backall.png"))); // NOI18N
+        btnVoltarT.setBorder(null);
+        btnVoltarT.setMaximumSize(new java.awt.Dimension(20, 20));
+        btnVoltarT.setMinimumSize(new java.awt.Dimension(20, 20));
+        btnVoltarT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarTActionPerformed(evt);
+            }
+        });
+
+        btnVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/back.png"))); // NOI18N
+        btnVoltar.setBorder(null);
+        btnVoltar.setMaximumSize(new java.awt.Dimension(20, 20));
+        btnVoltar.setMinimumSize(new java.awt.Dimension(20, 20));
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
+            }
+        });
+
+        btnAvancar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/skip.png"))); // NOI18N
+        btnAvancar.setBorder(null);
+        btnAvancar.setMaximumSize(new java.awt.Dimension(20, 20));
+        btnAvancar.setMinimumSize(new java.awt.Dimension(20, 20));
+        btnAvancar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAvancarActionPerformed(evt);
+            }
+        });
+
+        btnAvancarT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/skipall.png"))); // NOI18N
+        btnAvancarT.setBorder(null);
+        btnAvancarT.setMaximumSize(new java.awt.Dimension(20, 20));
+        btnAvancarT.setMinimumSize(new java.awt.Dimension(20, 20));
+        btnAvancarT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAvancarTActionPerformed(evt);
+            }
+        });
+
+        btnNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/new.png"))); // NOI18N
+        btnNovo.setBorder(null);
+        btnNovo.setMaximumSize(new java.awt.Dimension(20, 20));
+        btnNovo.setMinimumSize(new java.awt.Dimension(20, 20));
+        btnNovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNovoActionPerformed(evt);
+            }
+        });
+
+        lblMsg.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(lblNE, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtNE, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(txtCE, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblCE, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtCNPJ)
@@ -178,38 +352,71 @@ public class JFEmpresas extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtRS)
-                            .addComponent(lblRS, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(lblCE, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-                        .addComponent(txtCE, javax.swing.GroupLayout.Alignment.LEADING))
-                    .addComponent(txtNE)
-                    .addComponent(lblNE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(19, Short.MAX_VALUE))
+                            .addComponent(lblRS, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblMsg, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnVoltarT, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnAvancar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnAvancarT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(lblCE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtCE, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblNE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtNE, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnAvancarT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAvancar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnVoltarT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnNovo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAtualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblCNPJ)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblCE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtCE, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(11, 11, 11)
+                        .addComponent(lblNE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtNE, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(21, 21, 21)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblCNPJ)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblRS)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtRS, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblRS)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtRS, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(40, Short.MAX_VALUE))
+                        .addGap(148, 148, 148)
+                        .addComponent(lblMsg, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         pack();
@@ -231,6 +438,208 @@ public class JFEmpresas extends javax.swing.JFrame {
     private void txtCEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCEActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCEActionPerformed
+
+    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
+        // TODO add your handling code here:
+        atualizar();
+        btnAtualizar.setEnabled(true);
+        btnAvancar.setEnabled(true);
+        btnAvancarT.setEnabled(true);
+        btnExcluir.setEnabled(true);
+        btnVoltar.setEnabled(true);
+        btnVoltarT.setEnabled(true);
+        txtNE.setEnabled(true);
+        txtCNPJ.setEnabled(true);
+        txtRS.setEnabled(true);
+        btnNovo.setEnabled(true);
+        btnSalvar.setEnabled(false);
+
+    }//GEN-LAST:event_btnPesquisarActionPerformed
+
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        // TODO add your handling code here:
+        Connection con = Conexao.abrirConexao();
+        EmpresaBean eb = new EmpresaBean();
+        EmpresaDAO ed = new EmpresaDAO(con);
+        
+        eb.setNome(txtNE.getText());
+        eb.setCnpj(txtCNPJ.getText());
+        eb.setRazao(txtRS.getText());
+        lblMsg.setText(ed.inserirEmpresa(eb));
+        
+        
+        btnAtualizar.setEnabled(true);
+        btnAvancar.setEnabled(true);
+        btnAvancarT.setEnabled(true);
+        btnExcluir.setEnabled(true);
+        btnVoltar.setEnabled(true);
+        btnVoltarT.setEnabled(true);
+        btnNovo.setEnabled(true);
+        btnSalvar.setEnabled(false);
+
+        Conexao.fecharConexao(con);
+        
+    }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
+        // TODO add your handling code here:
+        txtCE.setText("");
+        txtNE.setText("");
+        txtCNPJ.setText("");
+        txtRS.setText("");
+        lblMsg.setText("");     
+        btnSalvar.setEnabled(true);
+        txtNE.setEnabled(true);
+        txtCNPJ.setEnabled(true);
+        txtRS.setEnabled(true);
+        btnNovo.setEnabled(false);
+        btnAtualizar.setEnabled(false);
+        btnAvancar.setEnabled(false);
+        btnAvancarT.setEnabled(false);
+        btnExcluir.setEnabled(false);
+        btnVoltarT.setEnabled(false);
+        btnVoltar.setEnabled(false);
+
+
+       
+        
+
+    }//GEN-LAST:event_btnNovoActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        // TODO add your handling code here:
+        if(table.getSelectedRow() != -1){
+       
+        Connection con = Conexao.abrirConexao();
+        EmpresaBean eb = new EmpresaBean();
+        EmpresaDAO ed = new EmpresaDAO(con);
+        
+       eb.setCod((int)table.getValueAt(table.getSelectedRow(), 0));
+        
+        Object[] opcoes = {"Sim", "Não"};
+        
+        int i = JOptionPane.showOptionDialog(
+                null,
+                "Deseja excluir esse Cliente: " + txtCE.getText() + "?",
+                "Exclusão",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                opcoes,
+                opcoes[0]);
+        
+        if (i == JOptionPane.YES_OPTION) {
+            lblMsg.setText(ed.removerEmpresa(eb));
+            txtCE.setText("");
+            txtCE.setEnabled(false);
+        txtNE.setEnabled(false);
+        txtCNPJ.setEnabled(false);
+        txtRS.setEnabled(false);
+        btnAtualizar.setEnabled(false);
+        btnAvancar.setEnabled(false);
+        btnAvancarT.setEnabled(false);
+        btnExcluir.setEnabled(false);
+        btnSalvar.setEnabled(false);
+        btnVoltar.setEnabled(false);
+        btnVoltarT.setEnabled(false);
+        }
+        Conexao.fecharConexao(con);
+    }   
+    
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
+        // TODO add your handling code here:
+        if(table.getSelectedRow() != -1){
+            
+        
+        Connection con = Conexao.abrirConexao();
+        EmpresaBean eb = new EmpresaBean();
+        EmpresaDAO ed = new EmpresaDAO(con);
+        
+        eb.setNome(txtNE.getText());
+        eb.setCnpj(txtCNPJ.getText());
+        eb.setRazao(txtRS.getText());
+        eb.setCod((int)table.getValueAt(table.getSelectedRow(), 0));
+        
+        Object[] opcoes = {"Sim", "Não"};
+        
+        int i = JOptionPane.showOptionDialog(
+                null,
+                "Deseja Alterar essa Empresa: " + txtCE.getText() + "?",
+                "Alteração",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                opcoes,
+                opcoes[0]);
+        
+        if (i == JOptionPane.YES_OPTION) {
+            lblMsg.setText(ed.alterarEmpresa(eb));
+            txtCE.setText("");
+            txtNE.setText("");
+            txtCNPJ.setText("");
+            txtRS.setText("");
+            txtCE.setEnabled(false);
+        txtNE.setEnabled(false);
+        txtCNPJ.setEnabled(false);
+        txtRS.setEnabled(false);
+        btnAtualizar.setEnabled(false);
+        btnAvancar.setEnabled(false);
+        btnAvancarT.setEnabled(false);
+        btnExcluir.setEnabled(false);
+        btnSalvar.setEnabled(false);
+        btnVoltar.setEnabled(false);
+        btnVoltarT.setEnabled(false);
+        }
+        Conexao.fecharConexao(con);
+        }
+    }//GEN-LAST:event_btnAtualizarActionPerformed
+
+    private void btnVoltarTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarTActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVoltarTActionPerformed
+
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void btnAvancarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvancarActionPerformed
+        // TODO add your handling code here:
+        Connection con = Conexao.abrirConexao();
+        EmpresaBean eb = new EmpresaBean();
+        EmpresaDAO ed = new EmpresaDAO(con);
+        
+        
+        
+    }//GEN-LAST:event_btnAvancarActionPerformed
+
+    private void btnAvancarTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvancarTActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAvancarTActionPerformed
+
+    private void tableKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tableKeyReleased
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_tableKeyReleased
+
+    private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
+        // TODO add your handling code here:
+        Connection con = Conexao.abrirConexao();
+        EmpresaBean eb = new EmpresaBean();
+        EmpresaDAO ed = new EmpresaDAO(con);
+        
+        int index = table.getSelectedRow();
+        
+        eb = ed.listarEmpresa().get(index);
+        
+        txtCE.setText(String.valueOf(eb.getCod()));
+        txtNE.setText(eb.getNome());
+        txtCNPJ.setText(eb.getCnpj());
+        txtRS.setText(eb.getRazao());
+        Conexao.fecharConexao(con);
+    }//GEN-LAST:event_tableMouseClicked
 
     /**
      * @param args the command line arguments
@@ -268,6 +677,16 @@ public class JFEmpresas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAtualizar;
+    private javax.swing.JButton btnAvancar;
+    private javax.swing.JButton btnAvancarT;
+    private javax.swing.JButton btnExcluir;
+    private javax.swing.JButton btnNovo;
+    private javax.swing.JButton btnPesquisar;
+    private javax.swing.JButton btnSalvar;
+    private javax.swing.JButton btnVoltar;
+    private javax.swing.JButton btnVoltarT;
+    private javax.swing.JButton jButton2;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -276,6 +695,7 @@ public class JFEmpresas extends javax.swing.JFrame {
     private javax.swing.JLabel lblCE;
     private javax.swing.JLabel lblCNPJ;
     private javax.swing.JLabel lblCli;
+    private javax.swing.JLabel lblMsg;
     private javax.swing.JLabel lblNE;
     private javax.swing.JLabel lblRS;
     private javax.swing.JTable table;

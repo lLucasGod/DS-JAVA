@@ -626,8 +626,6 @@ public class JFClientes extends javax.swing.JFrame {
         txtCel.setText(cb.getCel());
         txtEmail.setText(cb.getEmail());
 
-
-
     }//GEN-LAST:event_tableMouseClicked
 
     private void tableKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tableKeyReleased

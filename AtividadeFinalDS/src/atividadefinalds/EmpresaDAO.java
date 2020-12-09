@@ -3,12 +3,11 @@ package atividadefinalds;
 import java.sql.*;
 import java.util.*;
 
-
-public class ClienteDAO {
+public class EmpresaDAO {
     
     private Connection con;
 
-    public ClienteDAO(Connection con) {
+    public EmpresaDAO(Connection con) {
         this.con = con;
     }
 
@@ -20,21 +19,17 @@ public class ClienteDAO {
         this.con = con;
     }
     
-    
-    //Insert
-    public String inserirCliente(ClienteBean cliente) {
+    public String inserirEmpresa(EmpresaBean empresa) {
         
-        String sql = "insert into clientes(ID,Nome,TelRes,TelCom,Cel,Email)values(?,?,?,?,?,?)";
+        String sql = "insert into tbempresa(codEmp,nomeEmp,CNPJ,razaoSocial)values(?,?,?,?)";
         
         try {
             PreparedStatement ps = getCon().prepareStatement(sql);
             
-            ps.setInt(1, cliente.getId());            
-            ps.setString(2, cliente.getNome());
-            ps.setString(3, cliente.getTelRes());
-            ps.setString(4, cliente.getTelCom());
-            ps.setString(5, cliente.getCel());
-            ps.setString(6, cliente.getEmail());
+            ps.setInt(1, empresa.getCod());            
+            ps.setString(2, empresa.getNome());
+            ps.setString(3, empresa.getCnpj());
+            ps.setString(4, empresa.getRazao());
             
             if (ps.executeUpdate() > 0) {
                 return "Inserido com sucesso!!!";
@@ -47,16 +42,14 @@ public class ClienteDAO {
         }
     }
     
-    
-    //Delete
-    public String removerCliente(ClienteBean cliente) {
+    public String removerEmpresa(EmpresaBean empresa) {
 
-        String sql = "delete from clientes where ID = ?";
+        String sql = "delete from tbempresa where codEmp = ?";
 
         try {
             PreparedStatement ps = getCon().prepareStatement(sql);
 
-            ps.setInt(1, cliente.getId());
+            ps.setInt(1, empresa.getCod());
 
             if (ps.executeUpdate() > -1) {
                 return "Excluido com sucesso!!!";
@@ -69,22 +62,18 @@ public class ClienteDAO {
         }
     }
     
-    
-    //update
-    public String alterarCliente(ClienteBean cliente) {
+    public String alterarEmpresa(EmpresaBean empresa) {
 
-    String sql = "update clientes set Nome = ?, TelRes = ?, TelCom = ?, Cel = ?, Email = ? where ID = ?";
+    String sql = "update tbempresa set nomeEmp = ?, CNPJ = ?, razaoSocial = ? where codEmp = ?";
 
         try {
 
             PreparedStatement ps = getCon().prepareStatement(sql);
 
-            ps.setString(1, cliente.getNome());
-            ps.setString(2, cliente.getTelRes());
-            ps.setString(3, cliente.getTelCom());
-            ps.setString(4, cliente.getCel());
-            ps.setString(5, cliente.getEmail());
-            ps.setInt   (6, cliente.getId());
+            ps.setString(1, empresa.getNome());
+            ps.setString(2, empresa.getCnpj());
+            ps.setString(3, empresa.getRazao());
+            ps.setInt   (4, empresa.getCod());
 
             
             if (ps.executeUpdate() > -1) {
@@ -99,14 +88,11 @@ public class ClienteDAO {
         }
 
     }
-    
-    
-    //Select
-    public List<ClienteBean> listarCliente() {
+    public List<EmpresaBean> listarEmpresa() {
 
-        String sql = "select * from clientes";
+        String sql = "select * from tbempresa";
 
-        List<ClienteBean> listaCliente = new ArrayList<>();
+        List<EmpresaBean> listaEmpresa = new ArrayList<>();
 
         try {
             PreparedStatement ps = getCon().prepareStatement(sql);
@@ -117,18 +103,15 @@ public class ClienteDAO {
 
                 while (rs.next()) {
 
-                    ClienteBean cb = new ClienteBean();
-                    cb.setId(rs.getInt(1));
-                    cb.setNome(rs.getString(2));
-                    cb.setTelRes(rs.getString(3));
-                    cb.setTelCom(rs.getString(4));
-                    cb.setCel(rs.getString(5));
-                    cb.setEmail(rs.getString(6));
+                    EmpresaBean eb = new EmpresaBean();
+                    eb.setCod(rs.getInt(1));
+                    eb.setNome(rs.getString(2));
+                    eb.setCnpj(rs.getString(3));
+                    eb.setRazao(rs.getString(4));
 
-
-                    listaCliente.add(cb);
+                    listaEmpresa.add(eb);
                 }
-                return listaCliente;
+                return listaEmpresa;
             } else {
                 return null;
             }
@@ -139,6 +122,4 @@ public class ClienteDAO {
         
         
     }
-    
-
 }

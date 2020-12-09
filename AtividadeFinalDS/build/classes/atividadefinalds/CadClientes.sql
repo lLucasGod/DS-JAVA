@@ -11,3 +11,12 @@ Cel varchar(20),
 Email varchar(100),
 primary key(ID));
 
+
+Create table tbEmpresas(
+codEmp int not null auto_increment,
+nomeEmp varchar(100),
+CNPJ varchar(20),
+razaoSocial varchar(100),
+primary key(codEmp));
+
+
