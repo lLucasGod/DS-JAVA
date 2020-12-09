@@ -27,15 +27,25 @@ public class JFEmpresas extends javax.swing.JFrame {
         txtCNPJ.setEnabled(false);
         txtRS.setEnabled(false);
         btnAtualizar.setEnabled(false);
-        btnAvancar.setEnabled(false);
-        btnAvancarT.setEnabled(false);
+     //   btnAvancar.setEnabled(false);
+      //  btnAvancarT.setEnabled(false);
         btnExcluir.setEnabled(false);
         btnSalvar.setEnabled(false);
-        btnVoltar.setEnabled(false);
-        btnVoltarT.setEnabled(false);
+     //   btnVoltar.setEnabled(false);
+      //  btnVoltarT.setEnabled(false);
         
     }
     
+    public void proximo(){
+        int a = 0;
+                
+    if((true)){
+            
+           table.setRowSelectionInterval(a, 1);
+           a++;
+        }
+    
+    }
     
     public void atualizar(){
           
@@ -101,10 +111,6 @@ public class JFEmpresas extends javax.swing.JFrame {
         btnExcluir = new javax.swing.JButton();
         btnAtualizar = new javax.swing.JButton();
         btnPesquisar = new javax.swing.JButton();
-        btnVoltarT = new javax.swing.JButton();
-        btnVoltar = new javax.swing.JButton();
-        btnAvancar = new javax.swing.JButton();
-        btnAvancarT = new javax.swing.JButton();
         btnNovo = new javax.swing.JButton();
         lblMsg = new javax.swing.JLabel();
 
@@ -125,6 +131,7 @@ public class JFEmpresas extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro de Empresas");
+        setBackground(new java.awt.Color(51, 51, 51));
 
         lblCE.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         lblCE.setText("Código Empresa");
@@ -223,10 +230,12 @@ public class JFEmpresas extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblCli, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblCli, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -277,46 +286,6 @@ public class JFEmpresas extends javax.swing.JFrame {
             }
         });
 
-        btnVoltarT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/backall.png"))); // NOI18N
-        btnVoltarT.setBorder(null);
-        btnVoltarT.setMaximumSize(new java.awt.Dimension(20, 20));
-        btnVoltarT.setMinimumSize(new java.awt.Dimension(20, 20));
-        btnVoltarT.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVoltarTActionPerformed(evt);
-            }
-        });
-
-        btnVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/back.png"))); // NOI18N
-        btnVoltar.setBorder(null);
-        btnVoltar.setMaximumSize(new java.awt.Dimension(20, 20));
-        btnVoltar.setMinimumSize(new java.awt.Dimension(20, 20));
-        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVoltarActionPerformed(evt);
-            }
-        });
-
-        btnAvancar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/skip.png"))); // NOI18N
-        btnAvancar.setBorder(null);
-        btnAvancar.setMaximumSize(new java.awt.Dimension(20, 20));
-        btnAvancar.setMinimumSize(new java.awt.Dimension(20, 20));
-        btnAvancar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAvancarActionPerformed(evt);
-            }
-        });
-
-        btnAvancarT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/skipall.png"))); // NOI18N
-        btnAvancarT.setBorder(null);
-        btnAvancarT.setMaximumSize(new java.awt.Dimension(20, 20));
-        btnAvancarT.setMinimumSize(new java.awt.Dimension(20, 20));
-        btnAvancarT.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAvancarTActionPerformed(evt);
-            }
-        });
-
         btnNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/new.png"))); // NOI18N
         btnNovo.setBorder(null);
         btnNovo.setMaximumSize(new java.awt.Dimension(20, 20));
@@ -337,13 +306,16 @@ public class JFEmpresas extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(lblNE, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtNE, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtCE, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblCE, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(txtNE, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblNE, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
+                                .addComponent(lblCE, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(txtCE, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(lblMsg, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -353,11 +325,9 @@ public class JFEmpresas extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtRS)
                             .addComponent(lblRS, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblMsg, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addGap(31, 31, 31)
                 .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -367,56 +337,41 @@ public class JFEmpresas extends javax.swing.JFrame {
                 .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnVoltarT, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnAvancar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnAvancarT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnAvancarT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnAvancar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnVoltarT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnNovo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnAtualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblCE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtCE, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblMsg, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblNE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtNE, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblCNPJ)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblCE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCE, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(11, 11, 11)
-                        .addComponent(lblNE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNE, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(21, 21, 21)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblCNPJ)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblRS)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtRS, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(148, 148, 148)
-                        .addComponent(lblMsg, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(29, Short.MAX_VALUE))
+                        .addComponent(lblRS)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtRS, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         pack();
@@ -443,11 +398,11 @@ public class JFEmpresas extends javax.swing.JFrame {
         // TODO add your handling code here:
         atualizar();
         btnAtualizar.setEnabled(true);
-        btnAvancar.setEnabled(true);
-        btnAvancarT.setEnabled(true);
+      //  btnAvancar.setEnabled(true);
+      //  btnAvancarT.setEnabled(true);
         btnExcluir.setEnabled(true);
-        btnVoltar.setEnabled(true);
-        btnVoltarT.setEnabled(true);
+      //  btnVoltar.setEnabled(true);
+      //  btnVoltarT.setEnabled(true);
         txtNE.setEnabled(true);
         txtCNPJ.setEnabled(true);
         txtRS.setEnabled(true);
@@ -469,11 +424,11 @@ public class JFEmpresas extends javax.swing.JFrame {
         
         
         btnAtualizar.setEnabled(true);
-        btnAvancar.setEnabled(true);
-        btnAvancarT.setEnabled(true);
+       // btnAvancar.setEnabled(true);
+       // btnAvancarT.setEnabled(true);
         btnExcluir.setEnabled(true);
-        btnVoltar.setEnabled(true);
-        btnVoltarT.setEnabled(true);
+      //  btnVoltar.setEnabled(true);
+      ///  btnVoltarT.setEnabled(true);
         btnNovo.setEnabled(true);
         btnSalvar.setEnabled(false);
 
@@ -494,11 +449,11 @@ public class JFEmpresas extends javax.swing.JFrame {
         txtRS.setEnabled(true);
         btnNovo.setEnabled(false);
         btnAtualizar.setEnabled(false);
-        btnAvancar.setEnabled(false);
-        btnAvancarT.setEnabled(false);
+     //   btnAvancar.setEnabled(false);
+      //  btnAvancarT.setEnabled(false);
         btnExcluir.setEnabled(false);
-        btnVoltarT.setEnabled(false);
-        btnVoltar.setEnabled(false);
+      //  btnVoltarT.setEnabled(false);
+      //  btnVoltar.setEnabled(false);
 
 
        
@@ -536,12 +491,12 @@ public class JFEmpresas extends javax.swing.JFrame {
         txtCNPJ.setEnabled(false);
         txtRS.setEnabled(false);
         btnAtualizar.setEnabled(false);
-        btnAvancar.setEnabled(false);
-        btnAvancarT.setEnabled(false);
+       // btnAvancar.setEnabled(false);
+       // btnAvancarT.setEnabled(false);
         btnExcluir.setEnabled(false);
         btnSalvar.setEnabled(false);
-        btnVoltar.setEnabled(false);
-        btnVoltarT.setEnabled(false);
+       // btnVoltar.setEnabled(false);
+       // btnVoltarT.setEnabled(false);
         }
         Conexao.fecharConexao(con);
     }   
@@ -585,39 +540,16 @@ public class JFEmpresas extends javax.swing.JFrame {
         txtCNPJ.setEnabled(false);
         txtRS.setEnabled(false);
         btnAtualizar.setEnabled(false);
-        btnAvancar.setEnabled(false);
-        btnAvancarT.setEnabled(false);
+        //btnAvancar.setEnabled(false);
+        //btnAvancarT.setEnabled(false);
         btnExcluir.setEnabled(false);
         btnSalvar.setEnabled(false);
-        btnVoltar.setEnabled(false);
-        btnVoltarT.setEnabled(false);
+        //btnVoltar.setEnabled(false);
+        //btnVoltarT.setEnabled(false);
         }
         Conexao.fecharConexao(con);
         }
     }//GEN-LAST:event_btnAtualizarActionPerformed
-
-    private void btnVoltarTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarTActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnVoltarTActionPerformed
-
-    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_btnVoltarActionPerformed
-
-    private void btnAvancarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvancarActionPerformed
-        // TODO add your handling code here:
-        Connection con = Conexao.abrirConexao();
-        EmpresaBean eb = new EmpresaBean();
-        EmpresaDAO ed = new EmpresaDAO(con);
-        
-        
-        
-    }//GEN-LAST:event_btnAvancarActionPerformed
-
-    private void btnAvancarTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvancarTActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAvancarTActionPerformed
 
     private void tableKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tableKeyReleased
         // TODO add your handling code here:
@@ -678,14 +610,10 @@ public class JFEmpresas extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtualizar;
-    private javax.swing.JButton btnAvancar;
-    private javax.swing.JButton btnAvancarT;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnSalvar;
-    private javax.swing.JButton btnVoltar;
-    private javax.swing.JButton btnVoltarT;
     private javax.swing.JButton jButton2;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
@@ -704,4 +632,12 @@ public class JFEmpresas extends javax.swing.JFrame {
     private javax.swing.JTextField txtNE;
     private javax.swing.JTextField txtRS;
     // End of variables declaration//GEN-END:variables
+
+    private boolean tableMouseClicked(boolean b) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private boolean btnAvancarActionPerformed(boolean b) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
